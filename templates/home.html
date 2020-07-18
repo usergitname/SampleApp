@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<div class="container">
+
+<nav class="navbar navbar-light bg-light">
+    <a class="navbar-brand" font="100"><b>DEFECTS SUMMARY</b></a>
+  <form class="form-inline" method="GET">
+<!--    <input class="form-control mr-sm-2" name="your_name" type="search" placeholder="Search" aria-label="Search">-->
+    <a href="addnew" class="btn btn-primary">ADD NEW</a>
+  </form>
+</nav>
+
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Priority</th>
+      <th scope="col">State</th>
+        <th scope="col">Attachements</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for i in report %}
+    <tr>
+      <th scope="row">{{ forloop.counter }}</th>
+      <td>{{i.Name}}</td>
+      <td>{{i.Priority}}</td>
+      <td>{{i.State}}</td>
+        <td>{{i.Attachements}}</td>
+      <form method="get">
+        <td>
+          <button type="submit" href={% url i.Name %} >Edit</button>
+          </td>
+      </form>
+
+
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+
+    </div>
+</body>
+</html>

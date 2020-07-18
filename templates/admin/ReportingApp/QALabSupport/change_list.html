@@ -1,0 +1,62 @@
+{% extends "admin/change_list.html" %}
+{% load static %}
+<!-- Override extrahead to add Chart.js -->
+{% block extrahead %}
+{{ block.super }}
+{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+<!-- Render our chart -->
+<container>
+<div class="card" style="width: 18rem;">
+  <img src="https://www.publicdomainpictures.net/pictures/20000/velka/orange-oranges.jpg" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">Card title</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <a href="http://127.0.0.1:8000/admin/home/" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div>
+<p class="card-text">$5.5</p>
+
+    </container>
+<div style="width: 80%;">
+  <canvas style="margin-bottom: 30px; width: 60%; height: 50%;" id="myChart"></canvas>
+</div>
+<!-- Render the rest of the ChangeList view -->
+{{ block.super }}
+{% endblock %}
+
+
+{% block script %}
+<script type="text/javascript">
+function setGetParameter(){
+    window.location.href = "confirm";
+
+}
+
+$(document).ready(function(){
+   $("#stockform").submit(function(e){
+	// prevent from normal form behaviour
+      	e.preventDefault();
+    	// serialize the form data
+      	var serializedData = $(this).serialize();
+      	$.ajax({
+      		type : 'post',
+      		url :  "{% url 'contact_submit' %}",
+      		data : serializedData,
+      		success : function(response){
+			//reset the form after successful submit
+      			$("#stockform")[0].reset();
+
+
+      		},
+      		error : function(response){
+      			console.log(response)
+      		}
+      	});
+
+   });
+});
+</script>
+{% endblock %}
